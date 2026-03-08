@@ -1,15 +1,15 @@
 export const siteConfig = {
-  name: "MONDY",
-  fullName: "Ushan Mondy",
+  name: "Ushan Perera",
+  fullName: "Ushan Perera",
   role: "Linux Infrastructure & Reliability Engineer",
   tagline:
     "Building secure, production-grade Linux platforms, automation workflows, and resilient infrastructure.",
   description:
     "Senior infrastructure professional focused on Linux, bare metal systems, networking, automation, security hardening, and operational reliability.",
-  email: "your-email@example.com",
+  email: "malinthaushan444@gmail.com",
   github: "https://github.com/I-MONDY-I",
-  linkedin: "https://www.linkedin.com/",
-  domain: "https://your-domain.com",
+  linkedin: "https://www.linkedin.com/in/ushan-perera-564015120/",
+  domain: "https://ushan.space",
   location: "Sri Lanka",
 };
 
