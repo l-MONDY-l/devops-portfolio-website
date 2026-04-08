@@ -5,6 +5,8 @@ export type BlogPost = {
   title: string;
   excerpt: string;
   date: string;
+  /** ISO calendar date (YYYY-MM-DD). Used to hide posts before this day (UTC). */
+  publishedAt: string;
   coverImage: string;
   coverAlt: string;
   category: "Systems engineering" | "Full stack" | "System administration" | "Bare metal";
@@ -19,6 +21,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Why the best systems engineers spend as much time on contracts between components as on the components themselves.",
     date: "April 2, 2026",
+    publishedAt: "2026-04-02",
     coverImage:
       "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80&auto=format&fit=crop",
     coverAlt: "Circuit board macro representing interconnected systems",
@@ -53,6 +56,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "From browser and mobile clients through APIs, data stores, and caching—why tracing a single user journey keeps quality honest.",
     date: "April 3, 2026",
+    publishedAt: "2026-04-03",
     coverImage:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&auto=format&fit=crop",
     coverAlt: "Laptop displaying analytics and application development workflow",
@@ -87,6 +91,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Patch hygiene, configuration management, and the boring habits that prevent heroic firefighting.",
     date: "April 4, 2026",
+    publishedAt: "2026-04-04",
     coverImage:
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80&auto=format&fit=crop",
     coverAlt: "Laptop with programming workspace and code editor",
@@ -121,6 +126,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Latency, licensing, predictable performance, and edge deployments—cases where VMs and containers are not the whole story.",
     date: "April 5, 2026",
+    publishedAt: "2026-04-05",
     coverImage:
       "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80&auto=format&fit=crop",
     coverAlt: "Data center server racks with network cabling",
@@ -155,6 +161,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Out-of-band management, disk layouts, and the firmware cycle that keeps production from surprising you.",
     date: "April 6, 2026",
+    publishedAt: "2026-04-06",
     coverImage:
       "https://images.unsplash.com/photo-1597852074816-d933c7d2b988?w=1200&q=80&auto=format&fit=crop",
     coverAlt: "Close-up of server hardware components and storage",
@@ -189,6 +196,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Building shared context between apps and infrastructure so incidents shorten and postmortems teach.",
     date: "April 7, 2026",
+    publishedAt: "2026-04-07",
     coverImage:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&auto=format&fit=crop",
     coverAlt: "Dashboard charts and operational metrics on a display",
@@ -223,6 +231,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Versioning, compatibility, and the operational side of APIs that mobile and web clients depend on.",
     date: "April 8, 2026",
+    publishedAt: "2026-04-08",
     coverImage:
       "https://images.unsplash.com/photo-1580894732444-8bebded10b64?w=1200&q=80&auto=format&fit=crop",
     coverAlt: "Code editor on screen with programming syntax",
@@ -257,6 +266,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Blue-green, canaries, and database migrations—making releases boring on purpose.",
     date: "April 9, 2026",
+    publishedAt: "2026-04-09",
     coverImage:
       "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=1200&q=80&auto=format&fit=crop",
     coverAlt: "Software deployment and cloud infrastructure concept",
@@ -291,6 +301,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Rack density, lifecycle planning, and the facility constraints people forget when everything lived in a console.",
     date: "April 10, 2026",
+    publishedAt: "2026-04-10",
     coverImage:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80&auto=format&fit=crop",
     coverAlt: "Earth and network technology concept from space perspective",
@@ -325,6 +336,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Why system administrators and full stack engineers ship faster when SLOs and runbooks belong to everyone.",
     date: "April 11, 2026",
+    publishedAt: "2026-04-11",
     coverImage:
       "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80&auto=format&fit=crop",
     coverAlt: "Team collaboration around laptops in an office",
@@ -355,8 +367,31 @@ export const blogPosts: BlogPost[] = [
   },
 ];
 
+function utcDayStartTimestamp(d: Date): number {
+  return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
+}
+
+/** True when `publishedAt` (UTC calendar day) is on or before `now` (UTC calendar day). */
+export function isPostPublished(post: BlogPost, now: Date = new Date()): boolean {
+  const [y, m, day] = post.publishedAt.split("-").map(Number);
+  if (!y || !m || !day) return false;
+  const postStart = Date.UTC(y, m - 1, day);
+  return postStart <= utcDayStartTimestamp(now);
+}
+
+export function getPublishedBlogPosts(now: Date = new Date()): BlogPost[] {
+  return blogPosts.filter((p) => isPostPublished(p, now));
+}
+
 export function getPostBySlug(slug: string): BlogPost | undefined {
   return blogPosts.find((p) => p.slug === slug);
+}
+
+/** Resolves a post only if it exists and its `publishedAt` is not in the future (UTC day). */
+export function getPublishedPostBySlug(slug: string, now: Date = new Date()): BlogPost | undefined {
+  const post = getPostBySlug(slug);
+  if (!post || !isPostPublished(post, now)) return undefined;
+  return post;
 }
 
 export function getAllSlugs(): string[] {

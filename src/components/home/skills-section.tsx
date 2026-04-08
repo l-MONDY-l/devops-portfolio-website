@@ -10,7 +10,9 @@ export function SkillsSection() {
             <p className="text-sm font-medium uppercase tracking-[0.2em] text-sky-300">
               Core Expertise
             </p>
-            <h2 className="section-title mt-4 text-white">Built around systems, reliability, and practical execution</h2>
+            <h2 className="section-title mt-4 text-white">
+              Systems reliability plus modern application engineering
+            </h2>
           </div>
         </FadeIn>
 

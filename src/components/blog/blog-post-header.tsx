@@ -37,7 +37,7 @@ export function BlogPostHeader({ post }: { post: BlogPost }) {
 
       <div className="container-shell relative z-10 pb-12 pt-2">
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45 }}
         >
@@ -51,7 +51,7 @@ export function BlogPostHeader({ post }: { post: BlogPost }) {
 
         <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:items-start">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.05 }}
           >
@@ -67,7 +67,7 @@ export function BlogPostHeader({ post }: { post: BlogPost }) {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
+            initial={false}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.55, delay: 0.12 }}
             className="relative aspect-[16/10] w-full overflow-hidden rounded-3xl border border-white/10 shadow-soft lg:aspect-[4/3]"

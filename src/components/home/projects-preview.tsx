@@ -3,6 +3,8 @@ import { ArrowUpRight } from "lucide-react";
 import { featuredProjects } from "@/data/site";
 import { FadeIn } from "@/components/motion/fade-in";
 
+const homeProjects = featuredProjects.filter((p) => p.highlight);
+
 export function ProjectsPreview() {
   return (
     <section className="py-20">
@@ -13,9 +15,12 @@ export function ProjectsPreview() {
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-sky-300">
                 Featured Projects
               </p>
-              <h2 className="section-title mt-4 text-white">Tooling and scripts built for actual infrastructure work</h2>
+              <h2 className="section-title mt-4 text-white">
+                ERP, finance ops, observability, CMS estates &amp; open infrastructure
+              </h2>
               <p className="section-copy">
-                Focused on practical Linux administration, monitoring, automation, backup routines, and systems operations.
+                A sample across SaaS platforms, enterprise monitoring and cloud governance, high-scale CMS programs, and
+                public automation on Linux and bare metal.
               </p>
             </div>
 
@@ -26,7 +31,7 @@ export function ProjectsPreview() {
         </FadeIn>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {featuredProjects.map((project, index) => (
+          {homeProjects.map((project, index) => (
             <FadeIn key={project.title} delay={index * 0.08}>
               <article className="surface-card flex h-full flex-col p-6">
                 <h3 className="text-xl font-semibold text-white">{project.title}</h3>
@@ -43,13 +48,23 @@ export function ProjectsPreview() {
                   ))}
                 </div>
 
-                <Link
-                  href={project.href}
-                  target="_blank"
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-sky-300"
-                >
-                  Open project <ArrowUpRight size={16} />
-                </Link>
+                {project.href.startsWith("/") ? (
+                  <Link
+                    href={project.href}
+                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-sky-300"
+                  >
+                    {project.cta} <ArrowUpRight size={16} />
+                  </Link>
+                ) : (
+                  <a
+                    href={project.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-sky-300"
+                  >
+                    {project.cta} <ArrowUpRight size={16} />
+                  </a>
+                )}
               </article>
             </FadeIn>
           ))}

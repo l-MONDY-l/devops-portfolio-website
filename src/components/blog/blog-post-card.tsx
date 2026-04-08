@@ -9,7 +9,7 @@ import type { BlogPost } from "@/data/blog";
 export function BlogPostCard({ post, index }: { post: BlogPost; index: number }) {
   return (
     <motion.article
-      initial={{ opacity: 0, y: 28 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.5, delay: index * 0.06 }}

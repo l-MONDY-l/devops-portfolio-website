@@ -10,9 +10,9 @@ export function Metrics() {
             <p className="text-sm font-medium uppercase tracking-[0.2em] text-sky-300">
               Delivery Snapshot
             </p>
-            <h2 className="section-title mt-4 text-white">Operational depth with real-world infrastructure focus</h2>
+            <h2 className="section-title mt-4 text-white">From full stack delivery to production infrastructure</h2>
             <p className="section-copy">
-              Hands-on Linux systems work, infrastructure ownership, scripting, operational reliability, and secure support practices shaped by real production environments.
+              Web and mobile product work backed by serious systems discipline—Linux ownership, scripting, reliability practices, and secure operations learned in real production environments.
             </p>
           </div>
         </FadeIn>

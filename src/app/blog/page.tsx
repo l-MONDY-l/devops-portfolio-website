@@ -1,29 +1,26 @@
 import { FadeIn } from "@/components/motion/fade-in";
-import { blogPosts } from "@/data/site";
+import { getPublishedBlogPosts } from "@/data/blog";
+import { BlogPostCard } from "@/components/blog/blog-post-card";
 
 export default function BlogPage() {
+  const blogPosts = getPublishedBlogPosts();
+
   return (
     <main className="py-20">
       <div className="container-shell">
         <FadeIn>
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-sky-300">Blog</p>
           <h1 className="mt-4 text-4xl font-bold tracking-tight text-white md:text-5xl">
-            Thoughts on infrastructure, Linux, and automation
+            Engineering notes—systems, delivery, and automation
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
-            A simple writing space for operational lessons, technical breakdowns, and systems thinking.
+            A writing space for operational lessons, technical breakdowns, and how reliable infrastructure supports better product work.
           </p>
         </FadeIn>
 
-        <div className="mt-12 space-y-6">
+        <div className="mt-14 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {blogPosts.map((post, index) => (
-            <FadeIn key={post.slug} delay={index * 0.08}>
-              <article className="surface-card p-6 md:p-8">
-                <p className="text-sm text-slate-400">{post.date}</p>
-                <h2 className="mt-3 text-2xl font-semibold text-white">{post.title}</h2>
-                <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-400">{post.excerpt}</p>
-              </article>
-            </FadeIn>
+            <BlogPostCard key={post.slug} post={post} index={index} />
           ))}
         </div>
       </div>

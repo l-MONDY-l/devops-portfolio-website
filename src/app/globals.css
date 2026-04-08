@@ -8,10 +8,16 @@
 
 html {
   scroll-behavior: smooth;
+  /* Plain fallbacks if Tailwind utilities fail to load (e.g. wrong asset URL). */
+  background-color: #020617;
+  color: #e5eefb;
 }
 
 body {
   @apply bg-background text-foreground antialiased;
+  /* Reinforce base colors outside @apply */
+  background-color: #020617;
+  color: #e5eefb;
   background-image:
     radial-gradient(circle at top, rgba(56, 189, 248, 0.12), transparent 35%),
     radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.08), transparent 25%),
