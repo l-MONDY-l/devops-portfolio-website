@@ -3,7 +3,7 @@ import { FadeIn } from "@/components/motion/fade-in";
 
 export function SkillsSection() {
   return (
-    <section className="border-y border-white/10 py-20">
+    <section className="interactive-section border-y border-white/10 py-20">
       <div className="container-shell">
         <FadeIn>
           <div className="max-w-3xl">
@@ -19,7 +19,7 @@ export function SkillsSection() {
         <div className="mt-10 flex flex-wrap gap-3">
           {skills.map((skill, index) => (
             <FadeIn key={skill} delay={index * 0.03}>
-              <span className="inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-slate-200">
+              <span className="skill-chip">
                 {skill}
               </span>
             </FadeIn>

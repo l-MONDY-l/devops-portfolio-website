@@ -10,8 +10,7 @@ export function BlogPostCard({ post, index }: { post: BlogPost; index: number })
   return (
     <motion.article
       initial={false}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.06 }}
       whileHover={{ y: -4 }}
       className="group surface-card flex h-full flex-col overflow-hidden border-white/10 transition-shadow hover:border-sky-400/20 hover:shadow-[0_20px_50px_rgba(8,47,73,0.35)]"

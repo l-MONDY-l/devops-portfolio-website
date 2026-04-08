@@ -21,21 +21,21 @@ const AboutScene = dynamic(() => import("./about-scene").then((m) => m.AboutScen
 export function AboutHero() {
   return (
     <header className="relative overflow-hidden border-b border-white/10">
-      <div className="absolute inset-0 grid-bg opacity-[0.12]" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 grid-bg opacity-[0.12]" aria-hidden />
       <div className="relative min-h-[280px] w-full md:min-h-[360px]">
         <CanvasBoundary fallback={sceneFallback}>
           <AboutScene />
         </CanvasBoundary>
         <div
-          className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/92 to-slate-950/25 md:via-slate-950/88"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/92 to-slate-950/25 md:via-slate-950/88"
           aria-hidden
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-slate-950/75"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-slate-950/75"
           aria-hidden
         />
         <div
-          className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_20%_40%,rgba(56,189,248,0.08),transparent)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_20%_40%,rgba(56,189,248,0.08),transparent)]"
           aria-hidden
         />
       </div>

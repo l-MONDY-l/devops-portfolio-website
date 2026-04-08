@@ -6,8 +6,8 @@ import { ContactInteractiveBackdrop } from "@/components/contact/contact-interac
 
 export default function ContactPage() {
   return (
-    <main className="relative min-h-[calc(100vh-5rem)] overflow-hidden py-20">
-      <div className="absolute inset-0 z-0 min-h-full">
+    <main className="relative min-h-[calc(100vh-5rem)] overflow-x-hidden py-20">
+      <div className="pointer-events-none absolute inset-0 z-0 min-h-full" aria-hidden>
         <ContactInteractiveBackdrop />
       </div>
       <div className="container-shell relative z-10">
@@ -25,7 +25,8 @@ export default function ContactPage() {
           <FadeIn delay={0.05}>
             <Link
               href={`mailto:${siteConfig.email}`}
-              className="surface-card flex h-full flex-col border-white/15 bg-slate-950/45 p-6 backdrop-blur-md hover:bg-white/10"
+              className="footer-connect-card surface-card flex h-full flex-col border-white/15 bg-slate-950/45 p-6 backdrop-blur-md"
+              data-cursor-hover
             >
               <Mail className="text-sky-300" size={22} />
               <h2 className="mt-4 text-xl font-semibold text-white">Email</h2>
@@ -49,7 +50,8 @@ export default function ContactPage() {
             <Link
               href={siteConfig.linkedin}
               target="_blank"
-              className="surface-card flex h-full flex-col border-white/15 bg-slate-950/45 p-6 backdrop-blur-md hover:bg-white/10"
+              className="footer-connect-card surface-card flex h-full flex-col border-white/15 bg-slate-950/45 p-6 backdrop-blur-md"
+              data-cursor-hover
             >
               <Linkedin className="text-sky-300" size={22} />
               <h2 className="mt-4 text-xl font-semibold text-white">LinkedIn</h2>

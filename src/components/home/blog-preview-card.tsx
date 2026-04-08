@@ -9,8 +9,7 @@ export function BlogPreviewCard({ post, index }: { post: BlogPost; index: number
   return (
     <motion.article
       initial={false}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.08 }}
       whileHover={{ y: -3 }}
       className="group surface-card flex h-full flex-col overflow-hidden border-white/10"

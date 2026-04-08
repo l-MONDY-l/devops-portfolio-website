@@ -3,7 +3,7 @@ import { FadeIn } from "@/components/motion/fade-in";
 
 export function Metrics() {
   return (
-    <section className="py-20">
+    <section className="interactive-section py-20">
       <div className="container-shell">
         <FadeIn>
           <div className="max-w-3xl">

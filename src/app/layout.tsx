@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/layout/navbar";
+import { Navbar, NavbarPending } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { SiteChrome } from "@/components/layout/site-chrome";
 import { siteConfig } from "@/data/site";
 
 const inter = Inter({
@@ -56,15 +58,20 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" className="min-h-full">
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} min-h-full font-sans antialiased`}
+        className={`${inter.variable} ${jetbrainsMono.variable} theme-root min-h-full font-sans antialiased`}
         style={{
           backgroundColor: "#020617",
           color: "#e5eefb",
         }}
       >
-        <Navbar />
-        {children}
-        <Footer />
+        <SiteChrome />
+        <div className="relative z-[1] flex min-h-full flex-col">
+          <Suspense fallback={<NavbarPending />}>
+            <Navbar />
+          </Suspense>
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );

@@ -11,8 +11,8 @@ alwaysApply: true
 ## After code or config changes
 
 1. **Always run** `npm run build` from the repo root before wrapping up. **Fix** any compile, lint, or type errors and re-run until green.
-2. **Also run** `npm run start:local` **in the background** after a successful build when the user is iterating on the site locally or has asked to “run”, “preview”, or “see it”—so **http://127.0.0.1:4783** stays current. If **`EADDRINUSE` / port busy**, use **`npm run start:local:free`** (frees 4783 then starts) instead of stacking duplicate servers.
-3. Prefer **`npm run rebuild:serve`** when `.next` may be stale or the user hit chunk/CSS mismatch errors (`clean` → `build` → `start:local`).
+2. **Also run** `npm run start:local` **in the background** after a successful build when the user is iterating on the site locally or has asked to “run”, “preview”, or “see it”—so **http://127.0.0.1:4783** stays current. **`start:local` auto-frees port 4783 once** when it is busy (unless `START_LOCAL_NO_KILL=1`). For a **manual** free first, **`npm run start:local:free`** still exists.
+3. Prefer **`npm run rebuild:serve`** when `.next` may be stale or the user hit chunk/CSS mismatch errors (`clean` → `build` → `start:local`; the latter auto-frees 4783 when needed).
 4. **Never** run **`npm run dev`** and **`npm run start:local`** at the same time on this repo (shared `.next`).
 
 ## Dev vs production

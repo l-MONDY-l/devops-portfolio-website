@@ -134,7 +134,7 @@ export function ProjectsScene() {
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
         dpr={[1, Math.min(typeof window !== "undefined" ? window.devicePixelRatio : 1, 2)]}
         camera={{ position: [0, 0, 8.5], fov: 42 }}
-        style={{ background: "transparent" }}
+        style={{ background: "transparent", pointerEvents: "none" }}
       >
         <ambientLight intensity={0.32} />
         <pointLight position={[10, 8, 10]} intensity={1} color="#38bdf8" />

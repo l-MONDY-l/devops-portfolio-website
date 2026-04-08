@@ -12,8 +12,7 @@ export function BlogPostBody({ post }: { post: BlogPost }) {
             <motion.h2
               key={`${post.slug}-h2-${i}`}
               initial={false}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.35 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.45, delay: 0.03 }}
               className="text-xl font-semibold tracking-tight text-white md:text-2xl"
             >
@@ -25,8 +24,7 @@ export function BlogPostBody({ post }: { post: BlogPost }) {
           <motion.p
             key={`${post.slug}-p-${i}`}
             initial={false}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.02 }}
             className="text-base leading-8 text-slate-300"
           >

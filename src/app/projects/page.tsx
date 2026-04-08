@@ -10,16 +10,16 @@ import {
 
 function ProjectCta({ href, cta }: { href: string; cta: string }) {
   const className =
-    "mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-sky-300";
+    "mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white transition hover:text-sky-300 hover:drop-shadow-[0_0_12px_rgba(56,189,248,0.35)]";
   if (href.startsWith("/")) {
     return (
-      <Link href={href} className={className}>
+      <Link href={href} className={className} data-cursor-hover>
         {cta} <ArrowUpRight size={16} />
       </Link>
     );
   }
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
+    <a href={href} target="_blank" rel="noopener noreferrer" className={className} data-cursor-hover>
       {cta} <ArrowUpRight size={16} />
     </a>
   );
@@ -34,7 +34,7 @@ export default function ProjectsPage() {
           const items = featuredProjects.filter((p) => p.group === group);
           if (items.length === 0) return null;
           return (
-            <section key={group} className="mb-16 md:mb-24">
+            <section key={group} className="interactive-section mb-16 md:mb-24 rounded-3xl px-2 py-2 md:-mx-2 md:px-4 md:py-6">
               <FadeIn>
                 <h2 className="text-2xl font-semibold tracking-tight text-white md:text-3xl">
                   {projectGroupLabels[group]}

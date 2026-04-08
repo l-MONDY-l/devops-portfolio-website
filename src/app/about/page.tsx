@@ -18,10 +18,10 @@ function resolveVerifyHref(entry: (typeof certifications)[number], label: string
 
 export default function AboutPage() {
   return (
-    <main className="relative">
+    <main className="relative overflow-x-hidden">
       <AboutHero />
 
-      <div className="container-shell space-y-16 py-16 md:space-y-20 md:py-24">
+      <div className="interactive-section container-shell space-y-16 py-16 md:space-y-20 md:py-24">
         <FadeIn>
           <div className="relative overflow-hidden rounded-3xl border border-amber-400/20 bg-gradient-to-br from-slate-900/90 via-slate-950/95 to-slate-900/90 p-8 shadow-[0_0_60px_rgba(251,191,36,0.06)] md:p-10">
             <div className="absolute right-0 top-0 h-48 w-48 rounded-full bg-amber-400/10 blur-3xl" aria-hidden />

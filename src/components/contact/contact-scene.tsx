@@ -180,7 +180,7 @@ export function ContactScene() {
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
         dpr={[1, Math.min(typeof window !== "undefined" ? window.devicePixelRatio : 1, 2)]}
         camera={{ position: [0, 0, 8.2], fov: 45 }}
-        style={{ background: "transparent" }}
+        style={{ background: "transparent", pointerEvents: "none" }}
       >
         <ambientLight intensity={0.32} />
         <MouseLights />

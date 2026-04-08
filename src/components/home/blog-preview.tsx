@@ -6,7 +6,7 @@ export function BlogPreview() {
   const preview = getPublishedBlogPosts().slice(0, 3);
 
   return (
-    <section className="border-t border-white/10 py-20">
+    <section className="interactive-section border-t border-white/10 py-20">
       <div className="container-shell">
         <FadeIn>
           <div className="max-w-3xl">

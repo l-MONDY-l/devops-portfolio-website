@@ -4,6 +4,8 @@
 
 :root {
   color-scheme: dark;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --glow-sky: 0 0 60px rgba(56, 189, 248, 0.12);
 }
 
 html {
@@ -15,13 +17,18 @@ html {
 
 body {
   @apply bg-background text-foreground antialiased;
-  /* Reinforce base colors outside @apply */
+  /* Base fallbacks; ambient layers add depth via fixed backdrop in layout */
   background-color: #020617;
   color: #e5eefb;
-  background-image:
-    radial-gradient(circle at top, rgba(56, 189, 248, 0.12), transparent 35%),
-    radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.08), transparent 25%),
-    linear-gradient(to bottom, #020617, #030712 40%, #020617);
+}
+
+html.custom-cursor-active body {
+  cursor: none;
+}
+
+html.custom-cursor-active input,
+html.custom-cursor-active textarea {
+  cursor: text;
 }
 
 * {
@@ -39,6 +46,223 @@ body {
 
 .surface-card {
   @apply rounded-3xl border border-border bg-white/5 backdrop-blur-md shadow-soft;
+  transition:
+    transform 0.55s var(--ease-out-expo),
+    box-shadow 0.55s var(--ease-out-expo),
+    border-color 0.45s ease,
+    background-color 0.45s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .surface-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(56, 189, 248, 0.28);
+    box-shadow:
+      var(--glow-sky),
+      0 24px 50px rgba(2, 6, 23, 0.45);
+  }
+}
+
+.ambient-aurora {
+  position: absolute;
+  inset: -45%;
+  background: conic-gradient(
+    from 200deg at 50% 45%,
+    rgba(12, 74, 110, 0.55),
+    rgba(76, 29, 149, 0.45),
+    rgba(14, 116, 144, 0.4),
+    rgba(30, 58, 95, 0.5),
+    rgba(12, 74, 110, 0.55)
+  );
+  animation: ambient-rotate 100s linear infinite;
+  filter: blur(72px);
+  opacity: 0.55;
+}
+
+.ambient-blobs {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 35% at 15% 25%, rgba(56, 189, 248, 0.14), transparent 55%),
+    radial-gradient(ellipse 45% 40% at 85% 15%, rgba(139, 92, 246, 0.1), transparent 50%),
+    radial-gradient(ellipse 40% 35% at 70% 85%, rgba(6, 182, 212, 0.08), transparent 55%);
+  animation: ambient-drift 28s ease-in-out infinite alternate;
+}
+
+.ambient-grid {
+  position: absolute;
+  inset: 0;
+  background-image: theme("backgroundImage.grid");
+  background-size: 44px 44px;
+  animation: grid-drift 50s linear infinite;
+  opacity: 0.28;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 10%, transparent 75%);
+}
+
+.ambient-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.ambient-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 85% 75% at 50% 45%, transparent 40%, rgba(2, 6, 23, 0.85) 100%);
+  pointer-events: none;
+}
+
+.interactive-section {
+  position: relative;
+  transition:
+    background 0.7s var(--ease-out-expo),
+    box-shadow 0.7s var(--ease-out-expo);
+}
+
+@media (hover: hover) {
+  .interactive-section:hover {
+    box-shadow: inset 0 0 120px rgba(56, 189, 248, 0.035);
+  }
+}
+
+.skill-chip {
+  @apply inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-slate-200;
+  transition:
+    transform 0.4s var(--ease-out-expo),
+    border-color 0.4s ease,
+    background-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .skill-chip:hover {
+    transform: translateY(-3px) scale(1.02);
+    border-color: rgba(56, 189, 248, 0.35);
+    background-color: rgba(56, 189, 248, 0.08);
+    box-shadow: 0 12px 28px rgba(2, 6, 23, 0.35);
+  }
+}
+
+.btn-cta-primary,
+.btn-cta-secondary {
+  @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-2xl px-6 py-3 text-sm font-semibold transition-transform duration-300;
+}
+
+.btn-cta-primary::after,
+.btn-cta-secondary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 62%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.75s var(--ease-out-expo);
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .btn-cta-primary:hover::after,
+  .btn-cta-secondary:hover::after {
+    transform: translateX(120%);
+  }
+}
+
+.btn-cta-primary:active,
+.btn-cta-secondary:active {
+  transform: scale(0.97);
+}
+
+.btn-cta-primary {
+  @apply bg-sky-400 text-slate-950 shadow-[0_8px_28px_rgba(56,189,248,0.25)];
+}
+
+.btn-cta-primary:hover {
+  @apply bg-sky-300;
+  box-shadow: 0 12px 36px rgba(56, 189, 248, 0.35);
+}
+
+.btn-cta-secondary {
+  @apply border border-white/15 bg-white/5 text-white backdrop-blur-sm;
+}
+
+.btn-cta-secondary:hover {
+  @apply border-sky-400/25 bg-white/10;
+}
+
+.btn-icon-shine:active {
+  transform: scale(0.94);
+}
+
+.footer-connect-card {
+  @apply inline-flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-slate-300 transition;
+  transition:
+    transform 0.45s var(--ease-out-expo),
+    border-color 0.45s ease,
+    background-color 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer-connect-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(56, 189, 248, 0.35);
+    background-color: rgba(56, 189, 248, 0.06);
+    box-shadow: var(--glow-sky);
+  }
+}
+
+@keyframes ambient-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ambient-drift {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.04) translate(-1.5%, 1%);
+  }
+}
+
+@keyframes grid-drift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 44px 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-aurora,
+  .ambient-blobs,
+  .ambient-grid {
+    animation: none !important;
+  }
+
+  .surface-card:hover {
+    transform: none;
+  }
+
+  .btn-cta-primary::after,
+  .btn-cta-secondary::after {
+    display: none;
+  }
+
+  .skill-chip:hover {
+    transform: none;
+  }
+
+  .footer-connect-card:hover {
+    transform: none;
+  }
 }
 
 .section-title {

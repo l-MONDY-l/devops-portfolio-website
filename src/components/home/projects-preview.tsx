@@ -7,7 +7,7 @@ const homeProjects = featuredProjects.filter((p) => p.highlight);
 
 export function ProjectsPreview() {
   return (
-    <section className="py-20">
+    <section className="interactive-section py-20">
       <div className="container-shell">
         <FadeIn>
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -24,8 +24,13 @@ export function ProjectsPreview() {
               </p>
             </div>
 
-            <Link href="/projects" className="text-sm font-semibold text-sky-300 hover:text-sky-200">
+            <Link
+              href="/projects"
+              className="group relative text-sm font-semibold text-sky-300 transition hover:text-sky-100"
+              data-cursor-hover
+            >
               View all projects
+              <span className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-50 bg-sky-400/60 transition group-hover:scale-x-100" />
             </Link>
           </div>
         </FadeIn>
@@ -51,7 +56,8 @@ export function ProjectsPreview() {
                 {project.href.startsWith("/") ? (
                   <Link
                     href={project.href}
-                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-sky-300"
+                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white transition hover:text-sky-300 hover:drop-shadow-[0_0_12px_rgba(56,189,248,0.35)]"
+                    data-cursor-hover
                   >
                     {project.cta} <ArrowUpRight size={16} />
                   </Link>
@@ -60,7 +66,8 @@ export function ProjectsPreview() {
                     href={project.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-sky-300"
+                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white transition hover:text-sky-300 hover:drop-shadow-[0_0_12px_rgba(56,189,248,0.35)]"
+                    data-cursor-hover
                   >
                     {project.cta} <ArrowUpRight size={16} />
                   </a>

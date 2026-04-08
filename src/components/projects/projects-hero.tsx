@@ -20,17 +20,17 @@ const ProjectsScene = dynamic(() => import("./projects-scene").then((m) => m.Pro
 export function ProjectsHero() {
   return (
     <header className="relative overflow-hidden border-b border-white/10">
-      <div className="absolute inset-0 grid-bg opacity-[0.12]" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 grid-bg opacity-[0.12]" aria-hidden />
       <div className="relative min-h-[260px] w-full md:min-h-[320px]">
         <CanvasBoundary fallback={sceneFallback}>
           <ProjectsScene />
         </CanvasBoundary>
         <div
-          className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-950/20 md:via-slate-950/85"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-950/20 md:via-slate-950/85"
           aria-hidden
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/65"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/65"
           aria-hidden
         />
       </div>

@@ -23,16 +23,19 @@ const BlogHeroScene = dynamic(() => import("./blog-hero-scene").then((m) => m.Bl
 export function BlogPostHeader({ post }: { post: BlogPost }) {
   return (
     <header className="relative overflow-hidden border-b border-white/10">
-      <div className="absolute inset-0 grid-bg opacity-20" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 grid-bg opacity-20" aria-hidden />
       <div className="relative h-[220px] min-h-[200px] w-full md:h-[260px]">
         <CanvasBoundary fallback={blogSceneFallback}>
           <BlogHeroScene category={post.category} />
         </CanvasBoundary>
         <div
-          className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/88 to-slate-950/35"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/88 to-slate-950/35"
           aria-hidden
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/40" aria-hidden />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/40"
+          aria-hidden
+        />
       </div>
 
       <div className="container-shell relative z-10 pb-12 pt-2">

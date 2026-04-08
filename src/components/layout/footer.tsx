@@ -49,6 +49,7 @@ export function Footer() {
                   key={item.href}
                   href={item.href}
                   className="group inline-flex w-fit items-center gap-1 text-sm text-slate-400 transition hover:text-white"
+                  data-cursor-hover
                 >
                   <span className="border-b border-transparent transition group-hover:border-sky-400/50 group-hover:text-sky-200">
                     {item.label}
@@ -66,7 +67,8 @@ export function Footer() {
                   href={siteConfig.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-slate-300 transition hover:border-sky-400/25 hover:bg-sky-400/5 hover:text-sky-200"
+                  className="footer-connect-card group text-slate-300 hover:text-sky-200"
+                  data-cursor-hover
                 >
                   <Github className="shrink-0 text-slate-500 transition group-hover:text-sky-300" size={18} />
                   <span className="font-medium">GitHub</span>
@@ -96,7 +98,8 @@ export function Footer() {
               <li>
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="group inline-flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-slate-300 transition hover:border-sky-400/25 hover:bg-sky-400/5 hover:text-sky-200"
+                  className="footer-connect-card group text-slate-300 hover:text-sky-200"
+                  data-cursor-hover
                 >
                   <Mail className="shrink-0 text-slate-500 transition group-hover:text-sky-300" size={18} />
                   <span className="font-medium">Email</span>
@@ -120,6 +123,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex w-fit items-center gap-1 text-xs font-medium text-slate-500 transition hover:text-sky-300"
+            data-cursor-hover
           >
             {siteConfig.domain.replace(/^https?:\/\//, "")}
             <ArrowUpRight size={12} className="opacity-70" aria-hidden />

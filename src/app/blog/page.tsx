@@ -6,7 +6,7 @@ export default function BlogPage() {
   const blogPosts = getPublishedBlogPosts();
 
   return (
-    <main className="py-20">
+    <main className="interactive-section py-20">
       <div className="container-shell">
         <FadeIn>
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-sky-300">Blog</p>
