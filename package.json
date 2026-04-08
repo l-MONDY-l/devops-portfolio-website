@@ -7,9 +7,10 @@
     "build": "next build",
     "start": "next start",
     "start:local": "node scripts/start-local.mjs",
+    "start:local:free": "node scripts/free-port-4783.mjs && node scripts/start-local.mjs",
     "lint": "next lint",
     "clean": "npx --yes rimraf@5 .next",
-    "rebuild:serve": "npm run clean && npm run build && npm run start:local"
+    "rebuild:serve": "npm run clean && npm run build && npm run start:local:free"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

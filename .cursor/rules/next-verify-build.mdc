@@ -1,15 +1,21 @@
 ---
-description: After changing the Next.js app, run build (and server when needed); do not only suggest commands.
+description: Agent must run npm run build (and production server when useful)—never leave code-only handoffs for this Next.js app.
 globs: src/**,next.config.ts,package.json,tailwind.config.ts,postcss.config.js,scripts/*.mjs
-alwaysApply: false
+alwaysApply: true
 ---
 
-# Verify Next.js changes (build / server)
+# Next.js portfolio — always verify by running commands
 
-When you edit anything that affects the running site (under `src/`, or `next.config.ts`, `tailwind.config.ts`, `postcss.config.js`, `package.json` deps/scripts, or `scripts/*.mjs`):
+**Do not end a turn with only “run build yourself” instructions.** Execute the commands here unless the user explicitly asked for a no-terminal conversation.
 
-1. **Run** `npm run build` from the repo root yourself and **fix failures** before ending the task.
-2. If the user needs to **see** updates on **production mode** (`localhost:4783`), **run** `npm run start:local` in the background after a successful build—or **`npm run rebuild:serve`** for a clean cycle. Do not only tell them to run it.
-3. **Never** run `npm run dev` and `npm run start:local` at the same time on this project; they share `.next` and will break chunk URLs.
+## After code or config changes
 
-Default dev preview: `npm run dev` (dynamic port shown in terminal).
+1. **Always run** `npm run build` from the repo root before wrapping up. **Fix** any compile, lint, or type errors and re-run until green.
+2. **Also run** `npm run start:local` **in the background** after a successful build when the user is iterating on the site locally or has asked to “run”, “preview”, or “see it”—so **http://127.0.0.1:4783** stays current. If **`EADDRINUSE` / port busy**, use **`npm run start:local:free`** (frees 4783 then starts) instead of stacking duplicate servers.
+3. Prefer **`npm run rebuild:serve`** when `.next` may be stale or the user hit chunk/CSS mismatch errors (`clean` → `build` → `start:local`).
+4. **Never** run **`npm run dev`** and **`npm run start:local`** at the same time on this repo (shared `.next`).
+
+## Dev vs production
+
+- **`npm run dev`**: use when the user wants HMR / debugging; still run a **`npm run build`** before finishing if you changed `src/` or Next config, unless they only wanted a quick dev check.
+- **`start:local`**: production-style preview on port **4783**; default for “show me the site” after edits.

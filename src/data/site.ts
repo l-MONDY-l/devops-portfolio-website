@@ -9,9 +9,25 @@ export const siteConfig = {
   email: "malinthaushan444@gmail.com",
   github: "https://github.com/l-MONDY-l",
   linkedin: "https://www.linkedin.com/in/ushan-perera-564015120/",
+  /** LinkedIn profile → Licenses & certifications (for verification CTAs). */
+  linkedinCertifications:
+    "https://www.linkedin.com/in/ushan-perera-564015120/details/certifications/",
+  /** Red Hat certification verification (append your cert ID as query param when published). */
+  redHatVerifyBase: "https://www.redhat.com/rhtapps/certification/verify/",
   domain: "https://ushan.space",
   location: "Sri Lanka",
 };
+
+/** Builds the Red Hat public verification URL; add `credentialId` in certification data for a direct match. */
+export function redHatVerifyUrl(credentialId?: string) {
+  const base = siteConfig.redHatVerifyBase.endsWith("/")
+    ? siteConfig.redHatVerifyBase
+    : `${siteConfig.redHatVerifyBase}/`;
+  const u = new URL(base);
+  const id = credentialId?.trim();
+  if (id) u.searchParams.set("certId", id);
+  return u.toString();
+}
 
 /** WEB LAB — referenced on the About page with live agency links. */
 export const webLab = {
@@ -27,6 +43,115 @@ export const webLab = {
     { label: "weblabsolutions.co.uk", href: "https://weblabsolutions.co.uk/" },
   ],
 } as const;
+
+/**
+ * Education entries mirrored from the public LinkedIn profile
+ * (`linkedin.com/in/ushan-perera-564015120`). Years and exact programme title are not
+ * listed there publicly; update `period` / `credential` when you want more precision.
+ */
+export type EducationEntry = {
+  institution: string;
+  href: string;
+  department?: { name: string; href: string };
+  credential: string;
+  focus?: string;
+  period?: string;
+  description: string;
+};
+
+/**
+ * Professional certifications. Set optional `credentialId` for each Red Hat row to enable
+ * direct verification on rhtapps. The ISO row should name your real issuer and programme
+ * title to match your certificate and LinkedIn.
+ */
+export type CertificationEntry = {
+  title: string;
+  issuer: string;
+  summary: string;
+  /** Shown when set; add years or validity from your creds. */
+  period?: string;
+  /** Red Hat “certId” for rhtapps verify, or other short public reference you are comfortable publishing. */
+  credentialId?: string;
+  verify?: ReadonlyArray<{ label: string; href: string }>;
+};
+
+export const certifications: CertificationEntry[] = [
+  {
+    title: "ISO/IEC 27001 — Information Security Management",
+    issuer: "Accredited certification / training pathway",
+    summary:
+      "ISO 27001-aligned information security and governance credential—name your awarding body, scope (e.g. Foundation, Lead Implementer), and certificate reference in this copy when you publish exact details.",
+    verify: [
+      {
+        label: "Licenses & certifications on LinkedIn",
+        href: siteConfig.linkedinCertifications,
+      },
+    ],
+  },
+  {
+    title: "Red Hat Certified System Administrator (RHCSA)",
+    issuer: "Red Hat",
+    summary:
+      "RHEL system administration, deployment, configuration, and troubleshooting at enterprise standard.",
+    verify: [
+      {
+        label: "Verify on Red Hat",
+        href: redHatVerifyUrl(),
+      },
+      {
+        label: "LinkedIn credentials",
+        href: siteConfig.linkedinCertifications,
+      },
+    ],
+  },
+  {
+    title: "Red Hat Certified Engineer (RHCE)",
+    issuer: "Red Hat",
+    summary:
+      "Automation-focused engineer track on Red Hat Enterprise Linux—configuration management, multi-system administration, and repeatable operational patterns.",
+    verify: [
+      {
+        label: "Verify on Red Hat",
+        href: redHatVerifyUrl(),
+      },
+      {
+        label: "LinkedIn credentials",
+        href: siteConfig.linkedinCertifications,
+      },
+    ],
+  },
+  {
+    title: "Red Hat Certified Specialist in Ansible Automation Platform",
+    issuer: "Red Hat",
+    summary:
+      "Automation platform specialization—operations, content management, and controller patterns for repeatable infrastructure. Rename this row if your third badge is a different Specialist exam.",
+    verify: [
+      {
+        label: "Verify on Red Hat",
+        href: redHatVerifyUrl(),
+      },
+      {
+        label: "LinkedIn credentials",
+        href: siteConfig.linkedinCertifications,
+      },
+    ],
+  },
+];
+
+export const education: EducationEntry[] = [
+  {
+    institution: "University of Colombo",
+    href: "https://www.cmb.ac.lk/",
+    department: {
+      name: "University of Colombo School of Computing (UCSC)",
+      href: "https://ucsc.cmb.ac.lk/",
+    },
+    credential: "Graduate",
+    focus: "Information technology",
+    description:
+      "LinkedIn summarises a strong information technology professional graduated from the University of Colombo—complementing a career across systems administration, hybrid infrastructure, and cloud platforms.",
+  },
+];
 
 export const metrics = [
   {
@@ -56,6 +181,8 @@ export const skills = [
   "Linux Administration",
   "Bare Metal Infrastructure",
   "Red Hat Enterprise Linux",
+  "RHCSA & RHCE",
+  "ISO 27001 (governance & ISMS)",
   "Networking",
   "Bash Automation",
   "System Hardening",
